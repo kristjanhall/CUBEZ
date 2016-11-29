@@ -4,6 +4,9 @@
   Stemning B
   "ókyrrð, óvæntar breytingar, ljós litur"
 
+  Skali: f major
+  Hjóðfæri: Music Box (banki 0 - patch 10)
+  Steming: horfa á dögg dropa af laufum ofaní tjörn eftir rigningu og sólin hefur brotist út
 
   Skipun til að búa til midi skrá
   (load "/home/kristjanhall/Programming/lisp/CUBEZ/examples/steming_b.lisp")
@@ -16,9 +19,9 @@
 (setq rythm (CUBEZ.markov
     '(24 48 96 192)
     '((0.50 0.50 0.0  0.0 )
-      (0.30 0.30 0.30 0.10)
-      (0.30 0.30 0.30 0.10)
-      (0.40 0.30 0.20 0.10))
+      (0.40 0.35 0.15 0.10)
+      (0.35 0.40 0.20 0.05)
+      (0.40 0.40 0.15 0.05))
     scorelength
     24))
 
@@ -49,9 +52,9 @@
   :rythm rythm
   :duration (CUBEZ.duration
     :rythm rythm
-    :p 0.3
-    :minscale 0.85
-    :maxscale 0.9) 
+    :p 0.5
+    :minscale 0.80
+    :maxscale 0.95) 
   :velocity velocity
   :channel 1
   :fileName "steming_b.midi")

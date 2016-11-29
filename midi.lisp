@@ -159,7 +159,11 @@ supplied by Kjartan Ólafsson <kjartano@hi.is>
 (defun PW-midi-file-SAVE3  ( name1 path )
   (let (
     (new-att (time-list(append (list 0)  (cdr  (mapcar #'(lambda (l1 )(round2 (* 2 l1 )))  attack-list) ))))
-    (new-dur   (mapcar #'(lambda (l1 )(round2 (* 2 l1 )))    duration-list)))
+    (new-dur   (append (rest (mapcar #'(lambda (l1 )(round2 (* 2 l1 )))    duration-list)) (list 0))))
+  (print new-att)
+  (print (length new-att))
+  (print new-dur)
+  (print (length new-dur))
   (PW-midi-file-SAVE1  (make-midi-file-0
     new-att pitch-list new-dur velocity-list channels-list)  name1 path )))
 

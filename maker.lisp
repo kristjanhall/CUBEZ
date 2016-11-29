@@ -40,8 +40,8 @@ final assignment instructions under "lýsing á föllum"
       :duration duration
       :channels _channel
       :velocity _velocity)
-    ;(print (score.readList _score 'attack))
-    ;(print (score.readList _score 'duration))
+    (print (score.readList _score 'attack))
+    (print (score.readList _score 'duration))
     ;(print (utils.lists.lstDistances (score.readList _score 'attack) (score.readList _score 'duration)))
     (midi.writeMIDI :score _score :filePath filePath :fileName fileName :overwrite 1)
     (print "============================")

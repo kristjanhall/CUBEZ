@@ -4,6 +4,10 @@
   Karakter A
   "Hægur, litlar breytingar, jafnvægi, reglulegur"
 
+  Skali: mixolydian
+  Hljóðfæri: Pizzicato Section (Banki 0 - patch 45)
+  Karakter: köttur (gamal, hægfara, lippur)
+
 
   Skipun til að búa til midi skrá
   (load "/home/kristjanhall/Programming/lisp/CUBEZ/examples/karakter_a.lisp")

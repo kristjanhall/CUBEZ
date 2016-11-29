@@ -4,6 +4,9 @@
   Karakter B
   "Hraður, síbreytilegur, ójafnvægi, óreglulegur"
 
+  Skali: moll
+  Hljóðfæri: ukulele (banki 8 - patch 24)
+  Karakter: kanína að hoppa um
 
   Skipun til að búa til midi skrá
   (load "/home/kristjanhall/Programming/lisp/CUBEZ/examples/karakter_b.lisp")

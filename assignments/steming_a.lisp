@@ -4,6 +4,10 @@
   Stemning A
   "kyrrð, litlar breytingar, dökkur litur"
 
+  Skali: d minor
+  Hljóðfæri: Space Voice (banki 0 - patch 91)
+  Steming: Einhverjar leyndardómsfullar og framandi aðstæður - t.d. í tölvuleik að labba um yfirgefna geimstöð
+
 
   Skipun til að búa til midi skrá
   (load "/home/kristjanhall/Programming/lisp/CUBEZ/examples/steming_a.lisp")
@@ -49,11 +53,12 @@
       :symmetry 60)
     :validators (list (validator.notinlastN 4)))
   :rythm rythm
-  :duration (CUBEZ.duration
-    :rythm rythm
-    :p 0.3
-    :minscale 0.85
-    :maxscale 0.9) 
+  :duration rythm
+  ;:duration (CUBEZ.duration
+  ;  :rythm rythm
+  ;  :p 0.3
+  ;  :minscale 0.85
+  ;  :maxscale 0.9) 
   :velocity velocity
   :channel 1
-  :fileName "steming_a2.midi")
+  :fileName "steming_a.midi")
