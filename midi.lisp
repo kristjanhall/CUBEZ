@@ -160,10 +160,10 @@ supplied by Kjartan Ólafsson <kjartano@hi.is>
   (let (
     (new-att (time-list(append (list 0)  (cdr  (mapcar #'(lambda (l1 )(round2 (* 2 l1 )))  attack-list) ))))
     (new-dur   (append (rest (mapcar #'(lambda (l1 )(round2 (* 2 l1 )))    duration-list)) (list 0))))
-  (print new-att)
-  (print (length new-att))
-  (print new-dur)
-  (print (length new-dur))
+  ;(print new-att)
+  ;(print (length new-att))
+  ;(print new-dur)
+  ;(print (length new-dur))
   (PW-midi-file-SAVE1  (make-midi-file-0
     new-att pitch-list new-dur velocity-list channels-list)  name1 path )))
 

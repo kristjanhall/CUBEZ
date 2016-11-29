@@ -1,0 +1,54 @@
+
+Í meðfylgjandi zip skrá er að finna allann kóða sem lokaverkefið var unnið með sem og midi og ogg hljóðskrár. Þetta er 80% endurskrifun á því sem ég var búin að skila inn áður, þessu útgáfa inniheldur ekki föll sem ekki eru nýtt við úrlausn verkefnisins - fyrri útgáfu má en nálgast á github á slóðinni https://github.com/kristjanhall/CUBE. Þessa útgáfu má nálgast á slóðinni https://github.com/kristjanhall/CUBEZ
+
+Forritunar úrlausnir fyrir hvert verkefni er að finna undir möppunni "assignments" þar sem hver skrá er skýrð á viðeigandi hátt (steming_a.lisp, karakter_a.lisp etc.).
+Inni í hverri slíkri skrá má finna nánari lýsingu á viðkomandi úrlausn - hvaða skala er notast við, hvaða hlóðfæri, hvaða karakter eða stemingu má sjá fyrir sér. Einig er að finna þar upplýsingar hvernig má endur-keyra út midi skrárnar (ath að það þarf að uppfæra viðeigandi slóðið eins og vera ber).
+
+Föllin fimm má finna í skránni maker.lisp, þau eru (vonandi) ágætlega kommentuð. Dæmi um notkun á maker skránni væri t.d. eftirfarandi (sjá má fleir dæmi í úrlausnar skrám):
+
+---
+; búum til sér rythma breytu þar sem við notum hana á tvemur stöðum í "tréinu"
+; nýtum til þess markov keðjur sem tekur inn eithvað þema, lengd úttaks og upphafsgildi
+(setq rythm (CUBEZ.rythm
+    :len 160
+    :theme '(24 48 96 192)
+    :matrix '(
+      (0.00 1.00 0.0  0.0)
+      (0.0  0.75 0.25 0.0)
+      (0.0  0.70 0.20 1.0)
+      (0.0  0.90 0.10 0.0))
+    :start 48))
+
+; compose fallið (sjá maker.lisp) sér um að pikka upp viðeigandi lista og breytur og áframsenda til
+; midi.writeMIDI fallsins í midi.assists.lisp skránni
+(CUBEZ.compose
+  :pitch (CUBEZ.pitch             ; pitch tekur inn list sem er smíðaður með CUBEZ.pitch
+    :len 160                        ; lengd á úttaki
+    :theme '(57 65 67 65)           ; einhver þema
+    :settings (CUBEZ.settings       ; settings tekur inn settings klasa (sjá settings.lisp) sem er framreidur af CUBEZ.settings fallinu
+      :scale (scales.mixolydian)      ; skala sem skal notast við (sjá scales.lisp í þessu tilfelli)
+      :notintervals (interval.b)      ; listi af tónbilum sem má ekki nota (sjá intervals.lisp)
+      :minval 60                      ; má sleppa, default er 47
+      :maxval 72                      ; má sleppa, default er 72
+      :tries 5)                       ; má sleppa, default er 4 - hversu margar "spár" á að gera þegar verið er að búa til framhald af pitch lista
+    :weights (CUBEZ.weights         ; CUBEZ.weights skilar klasa af taginu fitness (sjá fitness.lisp) 
+      :space 20                       ; vægi í einkunargjöf
+      :order 40                       ; ..
+      :placement 30                   ; ..
+      :symmetry 10))                  ; ..
+  :rythm rythm                      ; rythm er listinn sem við bjuggum til að ofan með markov keðjunni
+  :duration (CUBEZ.duration         ; CUBEZ.duration sklar (kannski) sköluðu eintaki af öðrum lista (rythm í þessu tilfelli)
+    :rythm rythm                      ; 
+    :p 0.5                            ; líku á að eithvert stak verði skalað
+    :minscale 0.85                    ; ef skalað þá á bilinu minscale til maxscale
+    :maxscale 0.9)                    ; ..
+  :velocity 80                      ; velocity má vera ein tala eða listi af tölum - þá jafnlangur og pitch
+  :channel 2                        ; channel má vera ein tala eða lista af tölum - þá jafnlangur og pitch
+  :filePath "einhver/mappa"         ; úttaks mappa - má sleppa og þá er notast við gildið í midiPath (sjá CUBEZ.lisp)
+  :fileName "karakter_a.midi")      ; úttaksskrá
+---
+
+Föll eiga að vera nefnd með viðeigandi namespace-i, t.d. föll sem byrja á utils er að finna í utils.lisp skránni, föll sem byrja á lists eru í lists.lisp skránni o.s.fv.
+
+Ps
+Línu 162 í midi.lisp skránni (upphaflega fengin af uglu) var breytt þar sem þar var alltaf overlapp í nótum í midi skrá sama hvað, viðeigandi breyting skilaði mér a.m.k. réttri midi skrá
